@@ -9,11 +9,18 @@ class APP {
 	constructor() {
 	
 	}
-	initSever(request, response) {
-		// readFile相对于process.cwd()查找文件[node进程的启动目录]，CWD'current working directory'
-		fs.readFile('./public/index.html', 'utf8', (error, data)=> {
-			response.end(data)
-		});
+	initSever() {
+		// 初始化的工作，和请求逻辑互不影响
+		let _package = require('../package.json');
+		
+		
+		return (request, response)=> {
+			// 每个请求逻辑
+			// readFile相对于process.cwd()查找文件[node进程的启动目录]，CWD'current working directory'
+			fs.readFile('./public/index.html', 'utf8', (error, data)=> {
+				response.end(JSON.stringify(_package))
+			});
+		}
 	}
 }
 
