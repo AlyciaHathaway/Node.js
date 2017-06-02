@@ -3,12 +3,17 @@
  */
 // 主要核心逻辑入口
 
+const fs = require('fs');
+
 class APP {
 	constructor() {
 	
 	}
 	initSever(request, response) {
-		response.end('hello')
+		// readFile相对于process.cwd()查找文件[node进程的启动目录]，CWD'current working directory'
+		fs.readFile('./public/index.html', 'utf8', (error, data)=> {
+			response.end(data)
+		});
 	}
 }
 
