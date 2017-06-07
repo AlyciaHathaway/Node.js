@@ -1,11 +1,6 @@
 ---
 title: http & 静态服务器
 ---
-path.delimiter
-path.resolve(process.cwd()，'hello')
-path.basename(process.cwd())
-path.extname(process.cwd())
-
 ## 知识点
 
 ### http
@@ -25,6 +20,12 @@ path.extname(process.cwd())
 ### node
 
  - [path模块](https://github.com/nodejs/node/blob/master/doc/api/path.md)
+	```
+		path.delimiter
+		path.resolve(process.cwd()，'hello')
+		path.basename(process.cwd())
+		path.extname(process.cwd())
+	```
  - [path图解](https://github.com/slashhuang/pure-node-notebook-step/blob/master/doc/2nd-assets/path.png)
 
  - posix概念
@@ -40,6 +41,11 @@ path.extname(process.cwd())
 	- writeHead 和 setHead的区别 content-type
  - [fs模块](https://github.com/nodejs/node/blob/master/doc/api/fs.md)
 	- File I/O is provided by simple wrappers around standard POSIX functions 文件读取
+
+```
+fs.readFile('./', 'binary', (err)=>{console.log(err)})
+fs.readFileSync('./')
+```
 
  - [posix文档](https://linux.die.net/man/)
  - [file descriptor](https://www.sitepoint.com/accessing-the-file-system-in-node-js/)
