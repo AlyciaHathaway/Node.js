@@ -17,21 +17,15 @@ class APP {
 			let { url } = request;
 			
 			// 每个请求逻辑 根据url进行代码分发
-			if (url === '/css/index.css') {
-				fs.readFile('./public/css/index.css', 'utf-8', (err, data)=> {
+			let staticFunc = (url)=> {
+				if (url === '/') {
+					url = '/index.html'
+				}
+				fs.readFile(`./public${url}`, 'utf-8', (err, data)=> {
 					response.end(data)
 				})
-			}
-			if (url === '/js/index.js') {
-				fs.readFile('./public/js/index.js', 'utf-8', (err, data)=> {
-					response.end(data)
-				})
-			}
-			if (url === '/') {
-				fs.readFile('./public/index.html', 'utf-8', (error, data)=> {
-					response.end(data)
-				});
-			}
+			};
+			staticFunc(url);
 			// readFile相对于process.cwd()查找文件[node进程的启动目录]，CWD'current working directory'
 		}
 	}
