@@ -4,6 +4,7 @@
 // 主要核心逻辑入口
 
 const fs = require('fs');
+const path = require('path');
 
 class APP {
 	constructor() {
@@ -17,16 +18,22 @@ class APP {
 			let { url } = request;
 			
 			// 每个请求逻辑 根据url进行代码分发
+			// express框架 app.use(static('public'))绝对路径
+			// 程序原则：DRY，don't repeat yourself
+			let getPath = (url)=> {
+				return path.path.resolve(process.cwd(), 'public', `.${url}`)
+			};
 			let staticFunc = (url)=> {
 				if (url === '/') {
 					url = '/index.html'
 				}
-				fs.readFile(`./public${url}`, 'utf-8', (err, data)=> {
+				let _path = getPath(url);
+				fs.readFile(_path, 'utf-8', (err, data)=> {
 					response.end(data)
 				})
 			};
 			staticFunc(url);
-			// readFile相对于process.cwd()查找文件[node进程的启动目录]，CWD'current working directory'
+			// readFile相对于process.cwd()查找文件[node.js的当前工作目录]，CWD'current working directory'
 		}
 	}
 }
